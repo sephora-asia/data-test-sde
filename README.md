@@ -85,7 +85,7 @@ func() {
 ## Expected outputs
 - Source code of the exercise (Sections A and B).
 - Documentation of how you are proceeding and how to deploy and run locally (Sections A and B-2)
-- Credentials to access the datasets of your BQ instance for the data@luxola.com user (can be setup here https://console.cloud.google.com/iam-admin/iam. The BigQuery Data Viewer permission is enough)
+- Credentials to access the datasets of your BQ instance for the ds@luxola.com user (can be setup here https://console.cloud.google.com/iam-admin/iam. The BigQuery Data Viewer permission is enough)
 - URL endpoint of your API
 
 Good luck :)
