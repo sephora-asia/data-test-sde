@@ -32,18 +32,23 @@ We will first focus on the logic to implement and run the dependency tree, follo
 
 Your task is to build parts of the tool that will orchestrate the aforementioned process, in order to create the `final.products` table:
 
-1. Write a function that that would run the SQL scripts in the correct order. For example, since `tmp.variants` depends on `tmp.item_purchase_prices`, `res/tmp/item_purchase_prices.sql` needs to be run before we can run `res/tmp/variants.sql`. Please provide documentation as of how you are proceeding.
+1. Parse the SQL scripts and determine the dependencies between the SQL scripts. 
+
+*Your code should programmatically determine dependencies between the SQL scripts and should be flexible enough so that it will still work properly if more scripts are added in the `tmp` or `final` folder.
+The dependencies should not be hardcoded inside the script itself but should be a more flexible implementation (eg. as part of an auto-generated configuration file).*
+
+2. Write a function that would run the SQL scripts in the correct order, making use of the dependencies as determined in point **A-1**. For example, since `tmp.variants` depends on `tmp.item_purchase_prices`, `res/tmp/item_purchase_prices.sql` needs to be run before we can run `res/tmp/variants.sql`. Please provide documentation as of how you are proceeding.
 
 *Going further, we would like to parallelize the execution of few of these scripts. If you think of the dependencies as a tree: scripts from different nodes can work simultaneously, but, still, must not be executed before its children's tasks are done.*
 
-2. Write a function that parallelize the execution of the SQL scripts, ensuring they respect their dependencies. Please provide documentation as of how you are proceeding.
+3. Write a function that parallelize the execution of the SQL scripts, ensuring they respect their dependencies. Please provide documentation as of how you are proceeding.
 
 ### B - Deployment
 
 In this section, we will work on deploying an implementation of the previous question. 
 
 1. Setting up a BigQuery instance. 
-The data warehouse platform that we are using in Sephora is Google Bigquery.
+The data warehouse platform that we are using in Sephora is Google BigQuery.
 Google allows you to try BigQuery for free with a Google account (that you have by default with a gmail address for example)
 - Go to https://bigquery.cloud.google.com/welcome, login and create a project.
 - You will be redirected to console.developers.google.com where you can give a name to your project. 
@@ -54,10 +59,11 @@ Google allows you to try BigQuery for free with a Google account (that you have 
 - Click `Show Options`, uncheck `Use Legacy SQL`, and click `Hide Options`
 - Run the queries in the `db_init` folder to populate the `raw` dataset
 
-The instance is now ready!
+_The instance is now ready!_
 
 2. Update your previous code to run on BigQuery. Instead of having a fake function simulating the execution of the query in section A, implement it to run on BigQuery.
-Upon execution, the `tmp` and `final` datasets should be populated based on the `raw` data. Google BigQuery has a [documented API](https://cloud.google.com/bigquery/docs/reference/rest/v2/) as well as a bunch of SDKs available. 
+Upon execution, the `tmp` and `final` datasets should be populated based on the `raw` data. Google BigQuery has a [**documented API**](https://cloud.google.com/bigquery/docs/reference/rest/v2/) as well as a bunch of SDKs available so you can make use of these to run the queries on BigQuery
+
 
 3. Deploy an API on the platform of your choice. The API should obey the following specifications: 
 
@@ -71,9 +77,7 @@ Upon execution, the `tmp` and `final` datasets should be populated based on the 
 
 - The files in the `res/raw` folder represents the available raw data tables in the `raw` dataset.
 
-- For point A-1, your code should be flexible enough so that it will still work properly if more scripts are added in the tmp or final folder. The dependencies should not be hardcoded inside the script itself but should be a more flexible implementation (eg. as part of a configuration file).
-
-- For point A-2, you can use a dummy function such as the following as a placeholder for the function actually running the sql scripts (eg. here in golang):
+- For point **A-3**, you can use a dummy function such as the following as a placeholder for the function actually running the sql scripts (eg. here in golang):
 
 ```go
 func() {
@@ -84,7 +88,7 @@ func() {
  
 ## Expected outputs
 - Source code of the exercise (Sections A and B).
-- Documentation of how you are proceeding and how to deploy and run locally (Sections A and B-2)
+- Documentation of how you are proceeding and how to deploy and run locally (Sections **A** and **B-2**)
 - Credentials to access the datasets of your BQ instance for the **ds@luxola.com** user (can be setup here https://console.cloud.google.com/iam-admin/iam. The **BigQuery Data Viewer** permission is enough)
 - URL endpoint of your API
 
