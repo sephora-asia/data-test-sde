@@ -30,18 +30,20 @@ We will first focus on the logic to implement and run the dependency tree, follo
 
 ### A - Dependencies Orchestration
 
-Your task is to build parts of the tool that will orchestrate the aforementioned process, in order to create the `final.products` table:
+Your task is to build parts of the tool that will orchestrate the aforementioned process, in order to create the `final.products` table, there are several things to work on:
 
 1. Parse the SQL scripts and determine the dependencies between the SQL scripts. 
 
 *Your code should programmatically determine dependencies between the SQL scripts and should be flexible enough so that it will still work properly if more scripts are added in the `tmp` or `final` folder.
 The dependencies should not be hardcoded inside the script itself but should be a more flexible implementation (eg. as part of an auto-generated configuration file).*
 
-2. Write a function that would run the SQL scripts in the correct order, making use of the dependencies as determined in point **A-1**. For example, since `tmp.variants` depends on `tmp.item_purchase_prices`, `res/tmp/item_purchase_prices.sql` needs to be run before we can run `res/tmp/variants.sql`. Please provide documentation as of how you are proceeding.
+2. Run the SQL scripts in the correct order, making use of the dependencies as determined in point **A-1**. For example, since `tmp.variants` depends on `tmp.item_purchase_prices`, `res/tmp/item_purchase_prices.sql` needs to be run before we can run `res/tmp/variants.sql`. Please provide documentation as of how you are proceeding.
 
 *Going further, we would like to parallelize the execution of few of these scripts. If you think of the dependencies as a tree: scripts from different nodes can work simultaneously, but, still, must not be executed before its children's tasks are done.*
 
-3. Write a function that parallelize the execution of the SQL scripts, ensuring they respect their dependencies. Please provide documentation as of how you are proceeding.
+3. Parallelize the execution of the SQL scripts, ensuring they respect their dependencies. Please provide documentation as of how you are proceeding.
+
+Do structure your code well and free feel to use any programming paradiagm as long as it make sense and helps the person reviewing the code to understand it well.
 
 ### B - Deployment
 
