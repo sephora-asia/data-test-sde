@@ -43,7 +43,7 @@ The dependencies should not be hardcoded inside the script itself but should be 
 
 3. Parallelize the execution of the SQL scripts, ensuring they respect their dependencies. Please provide documentation as of how you are proceeding.
 
-Do structure your code well and free feel to use any programming paradiagm as long as it make sense and helps the person reviewing the code to understand it well.
+Do structure your code well and free feel to use any programming paradigm as long as it make sense and helps the person reviewing the code to understand it well.
 
 ### B - Deployment
 
