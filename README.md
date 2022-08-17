@@ -52,10 +52,10 @@ In this section, we will work on deploying an implementation of the previous que
 1. Setting up a BigQuery instance. 
 The data warehouse platform that we are using in Sephora is Google BigQuery.
 Google allows you to try BigQuery for free with a Google account (that you have by default with a gmail address for example)
-- Go to https://bigquery.cloud.google.com/welcome, login and create a project.
+- Go to https://cloud.google.com/bigquery, login and create a project.
 - You will be redirected to console.developers.google.com where you can give a name to your project. 
-- Once the project is created, and if not done by default, activate BigQuery API there: https://console.developers.google.com/apis/api/bigquery-json.googleapis.com/ (you might have to select your project in the header)
-- Once done, you now have access to bigquery ! https://bigquery.cloud.google.com/
+- Once the project is created, and if not done by default, activate BigQuery API there: https://console.cloud.google.com/apis/library/bigquery.googleapis.com (you might have to select your project in the header)
+- Once done, you now have access to bigquery ! https://cloud.google.com/bigquery
 - Let's create our datasets. In the left column of the UI, find the `No datasets found in this project` text. There, you will be able to create 3 datasets `raw`, `tmp` and `final`.
 - Click `Compose Query` 
 - Click `Show Options`, uncheck `Use Legacy SQL`, and click `Hide Options`
@@ -64,7 +64,7 @@ Google allows you to try BigQuery for free with a Google account (that you have 
 _The instance is now ready!_
 
 2. Update your previous code to run on BigQuery. Instead of having a fake function simulating the execution of the query in section A, implement it to run on BigQuery.
-Upon execution, the `tmp` and `final` datasets should be populated based on the `raw` data. Google BigQuery has a [**documented API**](https://cloud.google.com/bigquery/docs/reference/rest/v2/) as well as a bunch of SDKs available so you can make use of these to run the queries on BigQuery
+Upon execution, the `tmp` and `final` datasets should be populated based on the `raw` data. Google BigQuery has a bunch of SDKs available [**documented API**](https://cloud.google.com/bigquery/docs/reference/libraries) so you can make use of these to run the queries on BigQuery
 
 
 3. Deploy an API on the platform of your choice. The API should obey the following specifications: 
